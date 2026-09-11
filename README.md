@@ -81,3 +81,41 @@ Structured according to the **P-A-B-H-A** snapshot framework ([P] Clinical Probl
    * [MedSAM2](./docs/02_models/01_segmentation/medsam2.md) — `[M07]` Promptable 3D-as-video volumetric mask propagation via streaming memory bank.
    * [BiomedParse v2](./docs/02_models/01_segmentation/biomedparse_v2.md) — `[M08]` BoltzFormer text-guided multi-modal parser with built-in existence gating.
    * [Medical SAM3](./docs/02_models/01_segmentation/medical_sam3.md) — `[M09]` Universal text- and prompt-driven segmentation adapted across 10 modalities.
+2. 📂 **[02: Volumetric CT & MRI Radiology Foundation Models](./docs/02_models/02_volumetric_ct_mri/README.md)**:
+   * [CT-CLIP & CT-CHAT](./docs/02_models/02_volumetric_ct_mri/ct_clip_chat.md) — `[M13]` 3D chest CT language pretraining and conversational diagnosis on CT-RATE (*Nature Biomedical Engineering* 2026).
+   * [Merlin](./docs/02_models/02_volumetric_ct_mri/merlin.md) — `[M14]` Stanford 3D abdominal and pelvic CT vision-language foundation model across 752 clinical tasks (*Nature* 2026).
+   * [Decipher-MR](./docs/02_models/02_volumetric_ct_mri/decipher_mr.md) — `[M16]` GE/Harvard multimodal 3D MRI self-supervised foundation model across brain and body sequences (*npj Digital Medicine* 2026).
+   * [Prima](./docs/02_models/02_volumetric_ct_mri/prima.md) — `[M17]` University of Michigan report-supervised neuroimaging foundation model on 220k+ studies (*Nature Biomedical Engineering* 2026).
+   * [NeuroVFM](./docs/02_models/02_volumetric_ct_mri/neurovfm.md) — `[M17]` University of Michigan 3D V-JEPA visual foundation model across 5.24M routine CT/MRI volumes (*Nature Medicine* 2026).
+   * [MedGemma 1.5 4B](./docs/02_models/02_volumetric_ct_mri/medgemma_1_5.md) — `[M19]` Google Health AI multimodal foundation model with native 3D volumetric tokenization support.
+3. 📂 **[03: Chest Radiography (CXR) Foundation Models & Grounded Systems](./docs/02_models/03_chest_xray/README.md)**:
+   * [RAD-DINO](./docs/02_models/03_chest_xray/rad_dino.md) — `[M10]` Microsoft self-supervised DINOv2 ViT-B/14 specialized for chest radiographs (*Nature Machine Intelligence* 2025).
+   * [Ark & Ark+](./docs/02_models/03_chest_xray/ark_ark_plus.md) — `[S106,S107]` ASU/Mayo Clinic supervised heterogeneous-label knowledge accrual foundation models (*Nature* 2025, *MedIA* 2026).
+   * [CLEAR](./docs/02_models/03_chest_xray/clear.md) — `[M20]` Harvard/MGH auditable foundation model grounded in 368k clinical concepts (*Nature Biomedical Engineering* 2026).
+   * [MAIRA-2](./docs/02_models/03_chest_xray/maira_2.md) — `[M21]` Microsoft grounded multi-view CXR reporting model with localized bounding-box reasoning.
+   * [CARE-X](./docs/02_models/03_chest_xray/care_x.md) — `[M22]` Microsoft Research auxiliary-supervised, reward-aligned radiology VLM and deterministic tool measurement.
+4. 📂 **[04: Computational Pathology, Whole-Slide Imaging & Spatial Biology Models](./docs/02_models/04_pathology_wsi/README.md)**:
+   * [Prov-GigaPath & Flash](./docs/02_models/04_pathology_wsi/prov_gigapath.md) — `[M29]` Microsoft/Providence whole-slide gigapixel encoder with LongNet dilated attention (*Nature* 2024).
+   * [Virchow2 & Virchow2G](./docs/02_models/04_pathology_wsi/virchow2.md) — `[M30]` Paige AI/MSKCC mixed-magnification pan-cancer vision foundation model (3.1M WSIs, ViT-H/ViT-G).
+   * [UNI & UNI2-h](./docs/02_models/04_pathology_wsi/uni2_h.md) — `[M30]` Harvard/MGB generalist pathology foundation model (>350k WSIs, ViT-H 681M, *Nature Medicine* 2024).
+   * [H-Optimus-0 / 1](./docs/02_models/04_pathology_wsi/h_optimus_1.md) — `[M30]` Bioptimus 1.1B parameter open-weight pan-organ pathology foundation model (>1M WSIs, 4k centers).
+   * [TITAN](./docs/02_models/04_pathology_wsi/titan.md) — `[M31]` Harvard/MGB multimodal whole-slide foundation model with natural language slide retrieval (*Nature Medicine* 2025).
+   * [PRISM2](./docs/02_models/04_pathology_wsi/prism2.md) — `[M31]` Paige/MSKCC 4.6B multimodal whole-slide clinical dialogue model matching specialized commercial classifiers (*Nature Medicine* 2026).
+   * [CRISP](./docs/02_models/04_pathology_wsi/crisp.md) — `[M35]` Real-time intraoperative frozen-section specialist with prospective trial validation (*Nature Medicine* 2026).
+   * [VirTues](./docs/02_models/04_pathology_wsi/virtues.md) — `[M37]` EPFL/ETH multi-scale foundation model for measured multiplex spatial proteomics (*Nature* 2026).
+   * [GigaTIME & Flash](./docs/02_models/04_pathology_wsi/gigatime.md) — `[M36]` Microsoft/Providence generative cross-modal H&E to 21-channel virtual mIF synthesis (*Cell* 2026).
+5. 📂 **[05: Specialty Modalities & Frontier Foundation Models](./docs/02_models/05_specialty_fms/README.md)**:
+   * [EchoPrime & EchoCLIP](./docs/02_models/05_specialty_fms/echoprime_echoclip.md) — `[M27A]` Multi-view video echocardiography foundation models for beat-to-beat cardiac hemodynamics (*Nature* 2026, *Nature Medicine* 2024).
+   * [OCTCube-M](./docs/02_models/05_specialty_fms/octcube_m.md) — `[M26]` 3D multimodal volumetric retinal OCT, cSLO, and en-face foundation model (*Nature Biomedical Engineering* 2026).
+   * [RETFound & RETFound Plus](./docs/02_models/05_specialty_fms/retfound_plus.md) — `[M26]` Longitudinal fundus and retinal foundation representations for ocular and systemic phenomics (*Nature* 2023, *npj Digital Medicine* 2026).
+   * [PanDerm](./docs/02_models/05_specialty_fms/panderm.md) — `[M28C]` Multimodal dermatology foundation model across total-body photography, dermoscopy, clinical photos, and dermatopathology (*Nature Medicine* 2025/2026).
+   * [PanoFM & DentVLM](./docs/02_models/05_specialty_fms/panofm_dentvlm.md) — `[M28E]` Reusable panoramic radiography encoder and multimodal oral VLM across 7 dental modalities (*Pattern Recognition* 2026, *Nature Communications* 2026).
+   * [DeepSparse](./docs/02_models/05_specialty_fms/deepsparse.md) — `[M23]` Physics-guided sparse-view CBCT reconstruction foundation model slashing radiation dose by up to 90% (*IEEE TMI* 2026).
+   * [UniFMIR & FluoResFM](./docs/02_models/05_specialty_fms/unifmir.md) — `[M28D]` Universal fluorescence microscopy image restoration foundation models (*Nature Methods* 2024, *Nature Communications* 2026).
+   * [HorusEye](./docs/02_models/05_specialty_fms/horuseye.md) — `[S105]` Self-supervised X-ray tomography restoration foundation model across diverse physical degradations (*Nature Computational Science* 2026).
+6. 📂 **[06: General Medical Representations & Embedding Geometry](./docs/02_models/06_general_representations/README.md)**:
+   * [MedSigLIP](./docs/02_models/06_general_representations/medsiglip.md) — `[M10]` Google Health dual-tower multi-modal contrastive representation model (~840M params, SigLIP pairwise loss).
+   * [MedImageInsight](./docs/02_models/06_general_representations/medimageinsight.md) — `[M11]` Microsoft Research general-domain medical image embedding model across 10 modalities (DaViT backbone, Tier D Azure cloud API).
+   * [ConceptCLIP](./docs/02_models/06_general_representations/conceptclip.md) — `[M11/S38]` Concept-enhanced biomedical foundation model via large-scale UMLS knowledge alignment (Nature Biomed Eng 2026, MedConcept-23M).
+
+

@@ -39,4 +39,36 @@ Structured according to the **D-A-T-A-S + Leaderboard** schema, extracting clini
    * [Medical Segmentation Decathlon (MSD)](./docs/01_datasets/01_segmentation_3d/msd_decathlon.md) — 10 diverse challenge tasks (nnU-Net origin).
    * [LUNA16](./docs/01_datasets/01_segmentation_3d/luna16.md) — Thoracic CT lung nodule detection and FROC benchmark.
    * [autoPET / autoPET II](./docs/01_datasets/01_segmentation_3d/autopet.md) — Whole-body $^{18}\text{F-FDG}$ PET/CT metabolic lesion segmentation.
+2. 📂 **[02: Volumetric CT & MRI Radiology Datasets](./docs/01_datasets/02_radiology_ct_mri/README.md)**:
+   * [CT-RATE](./docs/01_datasets/02_radiology_ct_mri/ct_rate.md) — 3D chest CT paired with clinical reports (21k patients, 25k studies, 50k reconstructed volumes).
+   * [RadGenome-ChestCT](./docs/01_datasets/02_radiology_ct_mri/radgenome_chestct.md) — Grounded 3D chest CT with 197 mask categories, 665k grounded reports, and 1.2M/1.3M VQA pairs.
+   * [PatchChestCT](./docs/01_datasets/02_radiology_ct_mri/patch_chestct.md) — 3D patch-level spatial annotations across 2,201 reviewed CT studies for 9 abnormalities.
+   * [MR-RATE](./docs/01_datasets/02_radiology_ct_mri/mr_rate.md) — Health-system-scale multimodal brain and spine MRI (83k patients, 98k studies, 705k series/volumes).
+   * [Merlin Abdominal CT](./docs/01_datasets/02_radiology_ct_mri/merlin_abdominal_ct.md) — Multi-task abdominal & pelvic CT dataset with paired reports (25,494 scans from 18,317 patients).
+   * [RAD-ChestCT](./docs/01_datasets/02_radiology_ct_mri/rad_chestct.md) — Duke University chest CT cohort for out-of-distribution external validation (3,630 open scans).
+3. 📂 **[03: Chest Radiography (CXR) Benchmark & Representation Datasets](./docs/01_datasets/03_chest_xray/README.md)**:
+   * [MIMIC-CXR v2.1.0](./docs/01_datasets/03_chest_xray/mimic_cxr.md) — `[D12]` 377,110 DICOM images across 227,835 studies with clinical reports.
+   * [CheXpert](./docs/01_datasets/03_chest_xray/chexpert.md) — `[D13]` 224,316 radiographs from 65,240 patients with 14-observation uncertainty labels.
+   * [PadChest](./docs/01_datasets/03_chest_xray/padchest.md) — `[D14]` 160,868 radiographs across 109,931 studies with 174 radiographic findings.
+   * [NIH ChestX-ray14](./docs/01_datasets/03_chest_xray/nih_chestxray14.md) — `[D15]` 112,120 frontal CXRs from 30,805 patients with report-mined labels.
+   * [VinDr-CXR](./docs/01_datasets/03_chest_xray/vindr_cxr.md) — `[D16]` 18,000 CXRs with radiologist-annotated bounding boxes and global labels.
+   * [MS-CXR](./docs/01_datasets/03_chest_xray/ms_cxr.md) — `[D17]` 1,162 phrase-bounding-box pairs across 1,026 CXR images (MIMIC-CXR subset).
+   * [Chest ImaGenome](./docs/01_datasets/03_chest_xray/chest_imagenome.md) — `[D18]` Anatomical scene graphs across 242k CXRs with 500-patient gold subset.
+   * [BRAX](./docs/01_datasets/03_chest_xray/brax.md) — `[D19A]` 40,967 radiographs across 24,959 studies with Portuguese NLP labels.
+4. 📂 **[04: Pathology & Spatial Biology Datasets](./docs/01_datasets/04_pathology_spatial/README.md)**:
+   * [TCGA](./docs/01_datasets/04_pathology_spatial/tcga.md) — `[D25]` Pan-cancer WSIs across 33 cancer types (in-distribution baseline doctrine).
+   * [CPTAC](./docs/01_datasets/04_pathology_spatial/cptac.md) — `[D26]` Multi-tier proteogenomic cancer pathology & imaging ecosystem across GDC/PDC/TCIA.
+   * [CAMELYON16/17](./docs/01_datasets/04_pathology_spatial/camelyon17.md) — `[D27]` 1,000 lymph-node WSIs across 5 Dutch medical centres for metastasis detection & pN-staging (CC0).
+   * [PANDA](./docs/01_datasets/04_pathology_spatial/panda.md) — `[D28]` 10,600+ prostate biopsy WSIs from Radboud UMC and Karolinska Institute for ISUP grading.
+   * [GigaTIME Benchmark](./docs/01_datasets/04_pathology_spatial/gigatime_benchmark.md) — `[D29]` Paired H&E to 21-channel virtual mIF benchmark (50 public test patches vs proprietary pretraining).
+   * [PathoROB Suite](./docs/01_datasets/04_pathology_spatial/pathorob_suite.md) — `[S29/S28]` External multi-center patch suite evaluating biological performance vs technical confound invariance across 34 centres.
+5. 📂 **[05: Specialty Imaging Modalities & Longitudinal Frontier Datasets](./docs/01_datasets/05_specialty/README.md)**:
+   * [fastMRI](./docs/01_datasets/05_specialty/fastmri.md) — Raw measurement-domain k-space and accelerated clinical MRI reconstruction (>1,500 raw knee scans, 10k DICOMs, 6.9k raw brain scans).
+   * [EchoNet-Dynamic](./docs/01_datasets/05_specialty/echonet_dynamic.md) — Beat-to-beat cardiac function and LV segmentation on 10,030 echocardiography videos.
+   * [OCTCube & RETFound Cohorts](./docs/01_datasets/05_specialty/octcube_retfound_cohorts.md) — 3D retinal OCT volumes, multimodal cSLO/en-face imaging, and longitudinal fundus cohorts (OCTCube-M, RETFound Plus).
+   * [PanDerm Corpus](./docs/01_datasets/05_specialty/panderm_corpus.md) — Multimodal clinical dermatology corpus (2.15M images across TBP tiles, dermoscopy, clinical photos, and dermatopathology).
+   * [GastroNet-5M](./docs/01_datasets/05_specialty/gastro_net_5m.md) — Multicenter self-supervised endoscopy pretraining corpus (4.82M frames from ~500k procedures).
+   * [Dental Panoramic Cohorts](./docs/01_datasets/05_specialty/dental_panoramic_cohorts.md) — Panoramic radiography and multimodal oral imaging cohorts (PanoFM 127k scans, DentFound >101k patients, DentVLM).
+
+
 

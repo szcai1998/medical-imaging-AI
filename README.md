@@ -23,3 +23,20 @@ The ground layer provides a bias-resistant, evidence-audited map of medical-imag
 - **Specialty Modalities**: Ultrasound & Echocardiography (EchoPrime/EchoCLIP), Ophthalmology (OCTCube-M, RETFound Plus), Dermatology (PanDerm), Dental (PanoFM, DentVLM), PET/CT.
 - **Pathology & Spatial Biology**: Prov-GigaPath, Virchow2, UNI2-h, H-Optimus-1, TITAN, PRISM2, CRISP, VirTues, GigaTIME.
 - **Benchmarking & Translation Doctrine**: Multi-dimensional evidence profiles, dataset genealogy/contamination audits, domain-shift stress tests, and lifecycle validation frameworks.
+
+## Modular Dataset Documentation Library (`docs/01_datasets/`)
+
+Structured according to the **D-A-T-A-S + Leaderboard** schema, extracting clinical domain, acquisition physics, annotation truth provenance, access terms, and verified Top-5 SOTA leaderboards:
+
+1. 📂 **[01: 3D Segmentation & Anatomical Benchmarks](./docs/01_datasets/01_segmentation_3d/README.md)**:
+   * [KiTS23](./docs/01_datasets/01_segmentation_3d/kits23.md) — Kidney and renal tumor segmentation.
+   * [AMOS22](./docs/01_datasets/01_segmentation_3d/amos22.md) — 15 abdominal multi-organ CT & MRI benchmark.
+   * [TotalSegmentator](./docs/01_datasets/01_segmentation_3d/totalsegmentator.md) — 104/117 whole-body anatomical structures.
+   * [CVPR-BiomedSegFM](./docs/01_datasets/01_segmentation_3d/cvpr_biomedsegfm.md) — 200k+ multi-modal text-prompted 3D foundation model benchmark.
+   * [FLARE PanCancerCTSeg](./docs/01_datasets/01_segmentation_3d/flare_pancancer_ctseg.md) — Pan-cancer lesion & organ segmentation under resource constraints.
+   * [AbdomenAtlas 1.0/2.0](./docs/01_datasets/01_segmentation_3d/abdomen_atlas.md) — 20k multi-center CT volumes from 112 hospitals.
+   * [AbdomenAtlas 3.0](./docs/01_datasets/01_segmentation_3d/abdomen_atlas_3.md) — 3D CT image–mask–report triplets via RadGPT.
+   * [Medical Segmentation Decathlon (MSD)](./docs/01_datasets/01_segmentation_3d/msd_decathlon.md) — 10 diverse challenge tasks (nnU-Net origin).
+   * [LUNA16](./docs/01_datasets/01_segmentation_3d/luna16.md) — Thoracic CT lung nodule detection and FROC benchmark.
+   * [autoPET / autoPET II](./docs/01_datasets/01_segmentation_3d/autopet.md) — Whole-body $^{18}\text{F-FDG}$ PET/CT metabolic lesion segmentation.
+

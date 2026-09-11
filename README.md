@@ -4,7 +4,7 @@ This repository maintains the evidence-audited **Ground Layer for Medical Image 
 
 ## Core Reference Document
 
-* 📄 **[Technical Dossier: Medical Imaging AI — Ground-Layer Frontier Landscape (v4.1.0)](./dossier_medical_imaging_AI_ground_layer_v4.1.0_snapshot_2026-09-11.md)**
+* 📄 **[Technical Dossier: Medical Imaging AI — Ground-Layer Frontier Landscape (v4.1.0)](./docs/dossier_medical_imaging_AI_ground_layer_v4.1.0.md)**
   * **Document ID**: `DOSSIER-MED-02-IMAGING`
   * **Snapshot Date**: 11 September 2026
   * **Lifecycle**: Living, evidence-audited reference

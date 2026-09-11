@@ -70,5 +70,14 @@ Structured according to the **D-A-T-A-S + Leaderboard** schema, extracting clini
    * [GastroNet-5M](./docs/01_datasets/05_specialty/gastro_net_5m.md) — Multicenter self-supervised endoscopy pretraining corpus (4.82M frames from ~500k procedures).
    * [Dental Panoramic Cohorts](./docs/01_datasets/05_specialty/dental_panoramic_cohorts.md) — Panoramic radiography and multimodal oral imaging cohorts (PanoFM 127k scans, DentFound >101k patients, DentVLM).
 
+## Modular Model Documentation Library (`docs/02_models/`)
 
+Structured according to the **P-A-B-H-A** snapshot framework ([P] Clinical Problem, [A] Architectural Core, [B] Benchmark & Delta, [H] Hardware Footprint, [A] Access & Artifacts) with tier-calibrated availability and supervision stratification:
 
+1. 📂 **[01: 3D Segmentation & Spatial Parsing](./docs/02_models/01_segmentation/README.md)**:
+   * [nnU-Net v2](./docs/02_models/01_segmentation/nnunet_v2.md) — `[M04]` The self-configuring supervised benchmark standard and reference comparator.
+   * [VISTA3D / NV-Segment-CT](./docs/02_models/01_segmentation/vista3d.md) — `[M05]` 132-class automated whole-body parsing and interactive click segmentation.
+   * [SAT3D](./docs/02_models/01_segmentation/sat3d.md) — `[M06]` Uncertainty-aware whole-body pan-cancer tumour segmentation with critic feedback.
+   * [MedSAM2](./docs/02_models/01_segmentation/medsam2.md) — `[M07]` Promptable 3D-as-video volumetric mask propagation via streaming memory bank.
+   * [BiomedParse v2](./docs/02_models/01_segmentation/biomedparse_v2.md) — `[M08]` BoltzFormer text-guided multi-modal parser with built-in existence gating.
+   * [Medical SAM3](./docs/02_models/01_segmentation/medical_sam3.md) — `[M09]` Universal text- and prompt-driven segmentation adapted across 10 modalities.

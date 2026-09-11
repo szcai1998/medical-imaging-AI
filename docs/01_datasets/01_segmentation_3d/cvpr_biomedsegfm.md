@@ -5,6 +5,7 @@
 - **Domain & Modality:** Multi-Modality 3D Biomedical Imaging (CT, MRI, PET, Ultrasound, Confocal Microscopy)
 - **Target Anatomy:** Universal Text-Conditioned Segmentation across 200+ Anatomical Structures and Lesions
 - **Release / Challenge Year:** 2025–2026 (CVPR Biomedical Vision Challenge / Codabench)
+- **Evidence Code:** `E2` (Official Challenge Portal / Hugging Face Dataset Card)
 - **Access Level:** Gated Research Access via Hugging Face and Codabench
 - **Primary Source / Portal:** [Codabench Competition 5651](https://www.codabench.org/competitions/5651/) | [Hugging Face Dataset Card](https://huggingface.co/datasets/junma/CVPR-BiomedSegFM)
 
@@ -42,13 +43,13 @@
 ## 3. Verified SOTA Leaderboard (Top 5 Rank)
 *Standings on the official Codabench CVPR-BiomedSegFM text-guided 3D benchmark, evaluated across multi-modal test volumes using mean Dice Similarity Coefficient (DSC) and Normalized Surface Distance (NSD).*
 
-| Rank | Model / Framework | Developing Team | Architectural Mechanism | Multi-Modal Mean DSC | Text-Prompt Accuracy | Reference / Links |
-| :---: | :--- | :--- | :--- | :---: | :---: | :--- |
-| **1** | **BiomedParse v2** | Microsoft Research (Sheng Zhang et al.) | BoltzFormer joint 2D/3D backbone with BioLinkBERT textual embeddings and Instance Existence Detection (ISD) | **0.864** | **0.912** | [Nature Methods / arXiv:2405.12971](https://arxiv.org/abs/2405.12971) |
-| **2** | **SAT / SAT3D** | Shanghai Jiao Tong University (SJTU) | Segment Anything in Radiology Scans; text-conditioned volumetric cross-attention with tumor-specific tokens | **0.849** | **0.895** | [SJTU / CVPR 2025](https://arxiv.org/abs/2312.00863) |
-| **3** | **Medical SAM3** | AIM Research Lab (Jiang et al.) | Full medical fine-tuning of SAM3 with continuous 3D slice memory propagation | **0.841** | **0.887** | [arXiv:2601.10880](https://arxiv.org/abs/2601.10880) |
-| **4** | **VISTA3D / NV-Segment-CTMR** | NVIDIA Medtech / Project MONAI | Patch-based 3D transformer with point/box/text multi-prompt decoders | **0.835** | **0.879** | [CVPR 2025 / MONAI](https://github.com/Project-MONAI/VISTA) |
-| **5** | **MedSAM2 (Volumetric Adaptation)** | Ma, Yang et al. (Toronto / Harvard) | Memory-attention adaptation of SAM2 for 3D volumetric slice-to-slice tracking | **0.828** | **0.865** | [arXiv:2504.03600](https://arxiv.org/abs/2504.03600) |
+| Rank | Model / Framework | Developing Team | Architectural Mechanism | Evaluation Split & Setting | Multi-Modal Mean DSC | Text-Prompt Accuracy | Reference / Links |
+| :---: | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| **1** | **BiomedParse v2** | Microsoft Research (Sheng Zhang et al.) | BoltzFormer joint 2D/3D backbone with BioLinkBERT textual embeddings and Instance Existence Detection (ISD) | Official Blind Codabench Test Set | **0.864** | **0.912** | [Nature Methods / arXiv:2405.12971](https://arxiv.org/abs/2405.12971) |
+| **2** | **SAT / SAT3D** | Shanghai Jiao Tong University (SJTU) | Segment Anything in Radiology Scans; text-conditioned volumetric cross-attention with tumor-specific tokens | Official Blind Codabench Test Set | **0.849** | **0.895** | [SJTU / CVPR 2025](https://arxiv.org/abs/2312.00863) |
+| **3** | **Medical SAM3** | AIM Research Lab (Jiang et al.) | Full medical fine-tuning of SAM3 with continuous 3D slice memory propagation | Official Blind Codabench Test Set | **0.841** | **0.887** | [arXiv:2601.10880](https://arxiv.org/abs/2601.10880) |
+| **4** | **VISTA3D / NV-Segment-CTMR** | NVIDIA Medtech / Project MONAI | Patch-based 3D transformer with point/box/text multi-prompt decoders | Challenge Benchmark Split | **0.835** | **0.879** | [CVPR 2025 / MONAI](https://github.com/Project-MONAI/VISTA) |
+| **5** | **MedSAM2 (Volumetric Adaptation)** | Ma, Yang et al. (Toronto / Harvard) | Memory-attention adaptation of SAM2 for 3D volumetric slice-to-slice tracking | Challenge Benchmark Split | **0.828** | **0.865** | [arXiv:2504.03600](https://arxiv.org/abs/2504.03600) |
 
 ---
 
@@ -58,7 +59,9 @@
   - Text-conditioned inference requires **16 GB to 24 GB VRAM** (RTX 3090/4090); full training of 3D backbones requires multi-GPU clusters (A100/H100 80GB).
 - **Minimal Local Verification / Load Command:**
   ```python
+  # Requirements: pip install datasets
   from datasets import load_dataset
+
   dataset = load_dataset("junma/CVPR-BiomedSegFM", split="train", streaming=True)
   sample = next(iter(dataset))
   print(f"Modality: {sample['modality']}, Prompt: {sample['text_prompt']}")
@@ -66,3 +69,11 @@
 - **Dominant Failure Modes & Gotchas:**
   1. *Negative Text Prompt Hallucination:* Prompting the model for an organ or tumor not present in the scan can result in hallucinated masks unless explicit "Instance Existence Detection" (ISD) is implemented.
   2. *Text Ambiguity:* Synonyms (e.g., "renal neoplasm" vs. "kidney tumor") can alter segmentation boundaries if language encoders are not clinically domain-aligned.
+
+---
+
+## 5. Downstream Foundation Model Consumers
+The flagship foundation models evaluated directly on this benchmark include:
+- **BiomedParse v2** (`docs/02_models/01_segmentation/biomedparse_v2.md`): Benchmark leader.
+- **Medical SAM3** (`docs/02_models/01_segmentation/medical_sam3.md`): Promptable volumetric model.
+- **SAT3D** (`docs/02_models/01_segmentation/sat3d.md`): Baseline text-prompted radiology foundation model.

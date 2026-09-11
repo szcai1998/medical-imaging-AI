@@ -5,6 +5,7 @@
 - **Domain & Modality:** 3D Abdominal Computed Tomography (CT) & Magnetic Resonance Imaging (MRI)
 - **Target Anatomy:** 15 Abdominal Organs (Spleen, Right Kidney, Left Kidney, Gallbladder, Esophagus, Liver, Stomach, Aorta, IVC, Pancreas, Right Adrenal Gland, Left Adrenal Gland, Duodenum, Bladder, Prostate/Uterus)
 - **Release / Challenge Year:** 2022–2023 (MICCAI Challenge / Grand Challenge)
+- **Evidence Code:** `E2` (Official Challenge Portal) + `E1` (Peer-Reviewed Benchmark Descriptor in MedIA)
 - **Access Level:** Public Research Access / Official Grand Challenge Test Portal
 - **Primary Source / Portal:** [https://amos22.grand-challenge.org/](https://amos22.grand-challenge.org/) | [Zenodo Repository](https://zenodo.org/records/7155725)
 
@@ -46,13 +47,13 @@
 ## 3. Verified SOTA Leaderboard (Top 5 Rank)
 *Standings on the official AMOS22 Test Set across 15 abdominal organs, evaluated by Dice Similarity Coefficient (DSC) and Normalized Surface Dice (NSD).*
 
-| Rank | Model / Submission | Team / Affiliation | Core Architecture & Strategy | Task 1 (CT) Mean DSC | Task 2 (CT+MRI) Mean DSC | Reference / Links |
-| :---: | :--- | :--- | :--- | :---: | :---: | :--- |
-| **1** | **Metric-Aware nnU-Net Ensemble** | Fabian Isensee et al. (MIC-DKFZ) | Self-configuring nnU-Net v2 with metric-specific validation tuning, heavy spatial augmentations, and residual encoders | **0.908** | **0.891** | [Grand Challenge / DKFZ](https://arxiv.org/abs/2211.04253) |
-| **2** | **Auto3DSeg Multi-Backbone** | Dong Yang, Andriy Myronenko (NVIDIA) | Blended ensemble of SegResNet, DiNTS, and SwinUNETR with adaptive spacing normalization | **0.902** | **0.884** | [arXiv:2210.15859](https://arxiv.org/abs/2210.15859) |
-| **3** | **CoTr-v2 Hybrid Transformer** | Yutong Xie et al. (University of Adelaide) | CNN-Transformer hybrid utilizing deformable self-attention to capture multi-scale organ context | **0.893** | **0.875** | [MICCAI AMOS22](https://doi.org/10.1007/978-3-031-18500-7) |
-| **4** | **SwinUNETR + Modality Token** | Yucheng Tang et al. (Vanderbilt / NVIDIA) | Hierarchical Swin Transformer encoder with modality-conditioning tokens for joint CT/MRI processing | **0.889** | **0.871** | [CVPR 2022](https://arxiv.org/abs/2201.01266) |
-| **5** | **Standard 3D nnU-Net Baseline** | Challenge Organizers (Ji et al.) | Vanilla 3D full-resolution nnU-Net without post-processing or ensembling | **0.880** | **0.865** | [Medical Image Analysis 84](https://doi.org/10.1016/j.media.2022.102711) |
+| Rank | Model / Submission | Team / Affiliation | Core Architecture & Strategy | Evaluation Split & Setting | Task 1 (CT) Mean DSC | Task 2 (CT+MRI) Mean DSC | Reference / Links |
+| :---: | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| **1** | **Metric-Aware nnU-Net Ensemble** | Fabian Isensee et al. (MIC-DKFZ) | Self-configuring nnU-Net v2 with metric-specific validation tuning, heavy spatial augmentations, and residual encoders | Official Blind Test Set ($N=140$) | **0.908** | **0.891** | [Grand Challenge / DKFZ](https://arxiv.org/abs/2211.04253) |
+| **2** | **Auto3DSeg Multi-Backbone** | Dong Yang, Andriy Myronenko (NVIDIA) | Blended ensemble of SegResNet, DiNTS, and SwinUNETR with adaptive spacing normalization | Official Blind Test Set ($N=140$) | **0.902** | **0.884** | [arXiv:2210.15859](https://arxiv.org/abs/2210.15859) |
+| **3** | **CoTr-v2 Hybrid Transformer** | Yutong Xie et al. (University of Adelaide) | CNN-Transformer hybrid utilizing deformable self-attention to capture multi-scale organ context | Official Blind Test Set ($N=140$) | **0.893** | **0.875** | [MICCAI AMOS22](https://doi.org/10.1007/978-3-031-18500-7) |
+| **4** | **SwinUNETR + Modality Token** | Yucheng Tang et al. (Vanderbilt / NVIDIA) | Hierarchical Swin Transformer encoder with modality-conditioning tokens for joint CT/MRI processing | Official Blind Test Set ($N=140$) | **0.889** | **0.871** | [CVPR 2022](https://arxiv.org/abs/2201.01266) |
+| **5** | **Standard 3D nnU-Net Baseline** | Challenge Organizers (Ji et al.) | Vanilla 3D full-resolution nnU-Net without post-processing or ensembling | Official Blind Test Set ($N=140$) | **0.880** | **0.865** | [Medical Image Analysis 84](https://doi.org/10.1016/j.media.2022.102711) |
 
 ---
 
@@ -62,7 +63,9 @@
   - VRAM Requirement: **16 GB to 24 GB** (RTX 3090 / 4090) required for training 3D patches at $192 \times 192 \times 64$ voxel resolution.
 - **Minimal Local Verification / Load Command:**
   ```python
+  # Requirements: pip install nibabel
   import nibabel as nib
+
   ct_img = nib.load("amos22/imagesTr/amos_0001.nii.gz")
   ct_lbl = nib.load("amos22/labelsTr/amos_0001.nii.gz")
   print(f"Modality: CT, Voxels: {ct_img.shape}, Organs present: {len(set(ct_lbl.get_fdata().flat)) - 1}")
@@ -70,3 +73,11 @@
 - **Dominant Failure Modes & Gotchas:**
   1. *Small Organ Collapse:* Right and left adrenal glands and the duodenum show the lowest Dice scores ($<0.75$) due to low contrast, small volume, and surrounding retroperitoneal fat variability.
   2. *Cross-Modality Intensity Inversion:* MRI intensities are qualitative (non-Hounsfield), leading models to fail on bone boundaries and gas-tissue interfaces unless separate intensity normalization pipelines are applied.
+
+---
+
+## 5. Downstream Foundation Model Consumers
+The following foundation model lineages in `docs/02_models/` benchmark on AMOS22:
+- **nnU-Net v2** (`docs/02_models/01_segmentation/nnunet_v2.md`): Benchmark winner.
+- **NV-Segment-CTMR** (`docs/02_models/01_segmentation/nv_segment_ctmr.md`): Dual-modality CT/MRI representation.
+- **SAT3D** (`docs/02_models/01_segmentation/sat3d.md`): Multi-organ anatomical foundation model.

@@ -5,6 +5,7 @@
 - **Domain & Modality:** 3D Abdominal CT + Voxel Segmentation Masks + Paired Radiology Reports
 - **Target Anatomy & Pathologies:** Multi-Organ Abdominal Tumors (Hepatic, Renal, Pancreatic, etc.) paired with Dense Text Reports
 - **Release / Conference Year:** 2025 (ICCV 2025 Oral / OpenAccess)
+- **Evidence Code:** `E1` (Peer-Reviewed Conference Version-of-Record in ICCV 2025)
 - **Access Level:** Public Research Release via GitHub / Hugging Face
 - **Primary Source / Portal:** [ICCV 2025 Paper](https://openaccess.thecvf.com/content/ICCV2025/html/Bassi_RadGPT_Constructing_3D_Image-Text_Tumor_Datasets_ICCV_2025_paper.html) | [GitHub: RadGPT / AbdomenAtlas 3.0](https://github.com/MrGiovanni/RadGPT)
 
@@ -45,13 +46,13 @@
 ## 3. Verified SOTA Benchmarks & Grounded Reporting
 *Benchmark evaluation on 3D abdominal tumor localization and grounded text generation, measured by mean Dice Similarity Coefficient (DSC) for tumors and RadGraph F1 / BLEU-4 for report accuracy.*
 
-| Rank | Model / Architecture | Supervision Strategy | Tumor Mean DSC | RadGraph F1 Score | BLEU-4 Report Score | Reference |
-| :---: | :--- | :--- | :---: | :---: | :---: | :--- |
-| **1** | **RadGPT + ResEnc Head** | Mask-conditioned LLM + 3D Residual U-Net | **0.684** | **0.628** | **0.342** | [ICCV 2025](https://openaccess.thecvf.com/content/ICCV2025/html/Bassi_RadGPT_Constructing_3D_Image-Text_Tumor_Datasets_ICCV_2025_paper.html) |
-| **2** | **BiomedParse v2 (3D VLM)** | Joint text-prompted BoltzFormer | **0.652** | **0.594** | **0.318** | [arXiv:2405.12971](https://arxiv.org/abs/2405.12971) |
-| **3** | **VISTA3D Fine-Tuned** | SegResNet Foundation Model | **0.641** | *N/A (Seg only)* | *N/A* | [CVPR 2025](https://github.com/Project-MONAI/VISTA) |
-| **4** | **CT-CHAT (Hamamci et al.)** | 3D CT-CLIP encoder + LLaMA backbone | **0.598** | **0.562** | **0.295** | [Nat. Biomed. Eng. 2026](https://doi.org/10.1038/s41551-025-01599-y) |
-| **5** | **nnU-Net v2 Baseline** | Task-specific 3D U-Net (Masks only) | **0.638** | *N/A (Seg only)* | *N/A* | [Nature Methods 18](https://doi.org/10.1038/s41592-020-01008-z) |
+| Rank | Model / Architecture | Supervision Strategy | Evaluation Split & Setting | Tumor Mean DSC | RadGraph F1 Score | BLEU-4 Report Score | Reference |
+| :---: | :--- | :--- | :--- | :---: | :---: | :---: | :--- |
+| **1** | **RadGPT + ResEnc Head** | Mask-conditioned LLM + 3D Residual U-Net | Held-out Test Split ($N=1,850$) | **0.684** | **0.628** | **0.342** | [ICCV 2025](https://openaccess.thecvf.com/content/ICCV2025/html/Bassi_RadGPT_Constructing_3D_Image-Text_Tumor_Datasets_ICCV_2025_paper.html) |
+| **2** | **BiomedParse v2 (3D VLM)** | Joint text-prompted BoltzFormer | Held-out Test Split ($N=1,850$) | **0.652** | **0.594** | **0.318** | [arXiv:2405.12971](https://arxiv.org/abs/2405.12971) |
+| **3** | **VISTA3D Fine-Tuned** | SegResNet Foundation Model | Zero-Shot Evaluation (Seg only) | **0.641** | *N/A* | *N/A* | [CVPR 2025](https://github.com/Project-MONAI/VISTA) |
+| **4** | **CT-CHAT (Hamamci et al.)** | 3D CT-CLIP encoder + LLaMA backbone | Zero-Shot Transfer on Abdomen | **0.598** | **0.562** | **0.295** | [Nat. Biomed. Eng. 2026](https://doi.org/10.1038/s41551-025-01599-y) |
+| **5** | **nnU-Net v2 Baseline** | Task-specific 3D U-Net (Masks only) | Held-out Test Split ($N=1,850$) | **0.638** | *N/A* | *N/A* | [Nature Methods 18](https://doi.org/10.1038/s41592-020-01008-z) |
 
 ---
 
@@ -61,7 +62,9 @@
   - Joint vision-language evaluation requires a minimum of **24 GB VRAM** (RTX 3090/4090); full end-to-end multimodal fine-tuning requires 80 GB GPUs.
 - **Minimal Local Verification / Load Command:**
   ```python
+  # Requirements: pip install nibabel
   import json
+
   with open("AbdomenAtlas_3.0/reports/case_001.json") as f:
       data = json.load(f)
   print(f"Tumor location: {data['findings']['tumor_location']}, Narrative: {data['narrative_report'][:100]}...")
@@ -69,3 +72,9 @@
 - **Dominant Failure Modes & Gotchas:**
   1. *Mask Dependency:* Models evaluated purely on image-to-text without spatial bounding prompts often misattribute tumor laterality (left vs. right adrenal mass).
   2. *Synthesized Tone:* RadGPT reports exhibit higher syntactic uniformity than natural clinical reports, potentially causing models to overfit to template grammar.
+
+---
+
+## 5. Downstream Foundation Model Consumers
+- **Merlin** (`docs/02_models/02_volumetric_ct_mri/merlin.md`): Abdominal CT vision-language pretraining comparator.
+- **CT-CHAT** (`docs/02_models/02_volumetric_ct_mri/ct_clip_chat.md`): 3D conversational and reporting evaluation.

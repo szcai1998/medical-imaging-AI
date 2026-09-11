@@ -5,6 +5,7 @@
 - **Domain & Modality:** 3D Contrast and Non-Contrast Abdominal Computed Tomography (CT)
 - **Target Anatomy:** 22 Detailed Abdominal Organs and Vascular Structures
 - **Release / Publication:** 2024 (Medical Image Analysis 97:103285) | Continuous extensions (2.0/3.0)
+- **Evidence Code:** `E1` (Peer-Reviewed Version-of-Record in *Medical Image Analysis*)
 - **Access Level:** Open Multicenter Research Dataset via Hugging Face & GitHub
 - **Primary Source / Portal:** [MedIA Paper](https://doi.org/10.1016/j.media.2024.103285) | [GitHub: AbdomenAtlas](https://github.com/MrGiovanni/AbdomenAtlas) | [PubMed: 39116766](https://pubmed.ncbi.nlm.nih.gov/39116766/)
 
@@ -46,13 +47,13 @@
 ## 3. Verified SOTA Benchmarks & Transfer Rankings
 *Performance evaluated across the 22 abdominal structures on multi-center external test hospitals, measuring out-of-domain transfer via mean Dice Similarity Coefficient (DSC) and Normalized Surface Distance (NSD).*
 
-| Rank | Model / Framework | Backbone Architecture | In-Domain Mean DSC | Multi-Center Transfer DSC | HD95 Boundary Error | Reference |
-| :---: | :--- | :--- | :---: | :---: | :---: | :--- |
-| **1** | **ResEnc-L nnU-Net v2** | 3D Residual Encoder nnU-Net (Large) | **0.918** | **0.887** | **3.82 mm** | [MedIA 2024](https://doi.org/10.1016/j.media.2024.103285) |
-| **2** | **VISTA3D / NV-Segment-CT** | MONAI Foundation Model (SegResNet) | **0.912** | **0.881** | **4.05 mm** | [CVPR 2025](https://github.com/Project-MONAI/VISTA) |
-| **3** | **SwinUNETR (AbdomenAtlas Pretrained)** | Swin Transformer Encoder | **0.904** | **0.873** | **4.28 mm** | [MedIA 2024](https://doi.org/10.1016/j.media.2024.103285) |
-| **4** | **Standard nnU-Net Baseline** | Vanilla 3D fullres U-Net | **0.898** | **0.865** | **4.56 mm** | [Nature Methods 18](https://doi.org/10.1038/s41592-020-01008-z) |
-| **5** | **MedSAM (Zero-Shot Box Prompt)** | ViT-B Segment Anything Backbone | **0.871** | **0.842** | **5.91 mm** | [Nature Comms 15](https://doi.org/10.1038/s41467-024-44824-z) |
+| Rank | Model / Framework | Backbone Architecture | Evaluation Split & Setting | In-Domain Mean DSC | Multi-Center Transfer DSC | HD95 Boundary Error | Reference |
+| :---: | :--- | :--- | :--- | :---: | :---: | :---: | :--- |
+| **1** | **ResEnc-L nnU-Net v2** | 3D Residual Encoder nnU-Net (Large) | Multi-Center External Test Split | **0.918** | **0.887** | **3.82 mm** | [MedIA 2024](https://doi.org/10.1016/j.media.2024.103285) |
+| **2** | **VISTA3D / NV-Segment-CT** | MONAI Foundation Model (SegResNet) | Multi-Center External Test Split | **0.912** | **0.881** | **4.05 mm** | [CVPR 2025](https://github.com/Project-MONAI/VISTA) |
+| **3** | **SwinUNETR (Pretrained)** | Swin Transformer Encoder | Multi-Center External Test Split | **0.904** | **0.873** | **4.28 mm** | [MedIA 2024](https://doi.org/10.1016/j.media.2024.103285) |
+| **4** | **Standard nnU-Net Baseline** | Vanilla 3D fullres U-Net | Multi-Center External Test Split | **0.898** | **0.865** | **4.56 mm** | [Nature Methods 18](https://doi.org/10.1038/s41592-020-01008-z) |
+| **5** | **MedSAM (Zero-Shot Box Prompt)** | ViT-B Segment Anything Backbone | Zero-Shot Transfer on External Centers | **0.871** | **0.842** | **5.91 mm** | [Nature Comms 15](https://doi.org/10.1038/s41467-024-44824-z) |
 
 ---
 
@@ -62,7 +63,9 @@
   - Researchers should utilize the official 5k manual subset (~300 GB) for workstation-level training; full-scale pretraining requires multi-node A100/H100 infrastructure.
 - **Minimal Local Verification / Load Command:**
   ```python
+  # Requirements: pip install nibabel
   import nibabel as nib
+
   ct = nib.load("AbdomenAtlas_1.0/images/BDMAP_0000001.nii.gz")
   mask = nib.load("AbdomenAtlas_1.0/masks/BDMAP_0000001.nii.gz")
   print(f"Hospital Center: BDMAP, Voxel dimensions: {ct.shape}")
@@ -70,3 +73,11 @@
 - **Dominant Failure Modes & Gotchas:**
   1. *Counting Unit Fallacy:* "673K masks" refers to the sum of individual organ binary masks across all volumes, not 673,000 CT scans.
   2. *Vascular Inconsistency:* Segmenting small mesenteric vessels (celiac trunk, superior mesenteric artery) remains challenging without arterial phase timing.
+
+---
+
+## 5. Downstream Foundation Model Consumers
+Models trained on or evaluating with AbdomenAtlas:
+- **AbdomenNet** (`docs/02_models/02_volumetric_ct_mri/abdomennet.md`): Clinical foundation model for non-contrast CT.
+- **VISTA3D** (`docs/02_models/01_segmentation/vista3d.md`): Anatomical pretraining.
+- **SAT3D** (`docs/02_models/01_segmentation/sat3d.md`): Abdominal tumor and organ segmentation.
